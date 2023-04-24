@@ -4,6 +4,7 @@ body {
 
 header {
     background-color: rgb(61, 61, 110);
+    max-width: 100vw;
     color: white; 
     padding: 6px;
 }
@@ -56,6 +57,10 @@ button {
     width: 100%;
     color: #ffffff; 
 }
+button:hover {
+    cursor:pointer;
+    background-color:rgb(72, 105, 143);
+}
   
 .btn-recent{
     display: none;
@@ -79,19 +84,23 @@ button {
 }
 .result-container {
     display: flex;
-    flex: 0 0 80%;
-    padding-left: 10px;
-    border: solid 1px, #000000;
+    flex: auto;
+    flex-wrap: wrap;
     flex-direction: column;
+    margin: 20px;
 
 }
 .city-container{
     display: flex;
+    padding: 6px;
+    background-color: rgb(202, 202, 202);
+    border: 1px solid rgba(68, 88, 119, 1);
+    border-radius: 10px;
     flex-direction: column;
 }
 .forecast {
-    display: flex;
-padding-right: 10px;
+    display: flex;  
+    margin: 5px;
     flex-direction: row;   
     justify-content: space-between;
     
