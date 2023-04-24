@@ -35,7 +35,7 @@ input {
     margin: auto;
     height: 45px;
     width: 98%;
-    border: solid, 0.7px, #b5b5b5; 
+    border: solid, 0.7px, #6a6a6a; 
     border-radius: 7px;
 }
 
@@ -46,28 +46,33 @@ input::placeholder {
     color: black;
 }
 
-button {
+button  {
     margin: auto;
     margin-top: 10px;
-    background-color: rgb(105, 151, 203);
     border: none;
+    background-color: rgb(173, 173, 173);
     font-size: 18px;
     padding: 8px;
     border-radius: 5px;
     width: 100%;
-    color: #ffffff; 
+
 }
+.btn-submit{
+    background-color:rgb(105, 151, 203);
+    color: #ffffff;     
+}
+
 button:hover {
     cursor:pointer;
     background-color:rgb(72, 105, 143);
 }
   
-.btn-recent{
-    display: none;
+button .btn-recent{
+    display: block;
     margin: auto;
     margin-top: 10px;
     height: 40px;
-    background-color: rgb(194, 194, 194);
+    background-color: rgb(120, 35, 35);
     border: none;
     font-size: 18px;
     padding: 8px;

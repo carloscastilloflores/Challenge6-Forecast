@@ -6,12 +6,15 @@ var searchFormEl = document.querySelector('#search-form');
 var cityName = document.querySelector('#searchInput');
 var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=' + apiKey + "&units=metric";
 var getGeo = "http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid=8041e757f86e424b7d819b54bf38516d";
+var resultContainer = document.querySelector("#result-container");
 var cityContainer = document.querySelector("#city-container");
-var forecast1 = document.querySelector("#forecast-1")
-var forecast2 = document.querySelector("#forecast-2")
-var forecast3 = document.querySelector("#forecast-3")
-var forecast4 = document.querySelector("#forecast-4")
-var forecast5 = document.querySelector("#forecast-5")
+var forecastContainer = document.querySelector("#forecast");
+var forecast1 = document.querySelector("#forecast-1");
+var forecast2 = document.querySelector("#forecast-2");
+var forecast3 = document.querySelector("#forecast-3");
+var forecast4 = document.querySelector("#forecast-4");
+var forecast5 = document.querySelector("#forecast-5");
+var searchedCities = document.querySelector("#recent-search");
 
 var storedCities = document.getElementById('searchInput');  
 var cityData = [];
@@ -41,26 +44,22 @@ searchButton.addEventListener("click", function(event) {
 });
 */
 function getLat() {
-  
     var url = getGeo.replace('{city}', encodeURIComponent(cityName.value));
  
-        fetch(url)
-
-        .then(function (response) {
-            return response.json(); 
-        })
-        .then(function(data){
-            console.log(data)
-            console.log(data[0].lat, data[0].lon)
-            var lat = data[0].lat; 
-            var lon = data[0].lon;
-      
-        getApi(lat,lon);
+    fetch(url)
+    .then(function (response) {
+        return response.json(); 
+    })
+    .then(function(data){
+        console.log(data)
+        console.log(data[0].lat, data[0].lon)
+        var lat = data[0].lat; 
+        var lon = data[0].lon;
+    getApi(lat,lon);
     })};
 
 
 function getApi(lat, lon) {
-   
     var url = apiUrl.replace('{city}', encodeURIComponent(cityName)).replace('{lat}', lat).replace('{lon}', lon);
 
   fetch(url)
@@ -75,9 +74,16 @@ function getApi(lat, lon) {
       })};
 
 function displayApi(data) {
-    if (cityContainer.querySelectorAll('*').length > 4) {
-        cleanPage();
-    }
+    cityContainer.innerHTML = "";
+    forecast1.innerHTML = "";
+    forecast2.innerHTML = "";
+    forecast3.innerHTML = "";
+    forecast4.innerHTML = "";
+    forecast5.innerHTML = "";
+  //  resultContainer.innerHTML = "";
+   // if (cityContainer.querySelectorAll('*').length > 4) {
+    //    cleanPage();
+    //}
    /*if (cityContainer.value > 2) {
     console.log(cityData);
     }*/
@@ -191,7 +197,7 @@ function displayApi(data) {
     var humidity5 = document.createElement('p');
     humidity5.textContent = "Humidity: " + data.list[39].main.humidity + "%";
     forecast5.append(humidity5);
- 
+
 }
 
 function saveCity(data) {
@@ -200,6 +206,7 @@ function saveCity(data) {
       }
 
     var storedCities = JSON.parse(localStorage.getItem("cityData"));
+    localStorage.setItem("cityData", JSON.stringify(storedCities));
 
     if (!storedCities){
         storedCities = []; // create an empty array if storedData is null or undefined
@@ -209,15 +216,28 @@ function saveCity(data) {
         } else {
         storedCities = [cityData];
         }
-    
+    if (storedCities) {
+        for (var i = 0; i < storedCities.length; i++) {
+        
+            var searchedCity = document.createElement("button");
+            searchedCity.textContent = storedCities[i++].cityName; 
+            searchedCities.appendChild(searchedCity);
+          //  searchedCity.classList.add('btn-recent');
+        }}
+        /*
+        var searchedCity = document.createElement('button');
+        searchedCity.textContent = storedCities[0].cityName;
         localStorage.setItem("cityData", JSON.stringify(storedCities));
+        searchedCities.appendchild(searchedCity);*/
+        
 }
-
+    /*
 
 function cleanPage() {
     var resultContainer = document.querySelector(".result-container");
     resultContainer.innerHTML = " ";
-    /*var elements = document.getElementsByClassName('result-container');
+}
+var elements = document.getElementsByClassName('result-container');
     while(elements.length > 0){
       elements[0].parentNode.removeChild(elements[0]);
     }
@@ -230,8 +250,8 @@ function cleanPage() {
     }
 
 
+
+document.getElementsByClassName('search-container').remove();
     */
-    // document.getElementsByClassName('search-container').remove();
-}
 
 
