@@ -5,7 +5,7 @@ var apiKey = "8041e757f86e424b7d819b54bf38516d";
 var searchFormEl = document.querySelector('#search-form');
 var cityName = document.querySelector('#searchInput');
 var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=' + apiKey + "&units=metric";
-var getGeo = "http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid=8041e757f86e424b7d819b54bf38516d";
+var getGeo = "https://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid=8041e757f86e424b7d819b54bf38516d";
 var resultContainer = document.querySelector("#result-container");
 var cityContainer = document.querySelector("#city-container");
 var forecastContainer = document.querySelector("#forecast");
